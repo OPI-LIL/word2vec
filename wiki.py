@@ -1,19 +1,20 @@
-import os
 import sys
 import logging
+import os
 
 from gensim.models import Word2Vec
-from common_crawl.CassandraSentences import CassandraSentences
-from utils import parse_args
+from gensim.models.word2vec import LineSentence
 
-if __name__ == "__main__":
+from common.utils import parse_args, slice
+
+if __name__ == '__main__':
     program = os.path.basename(sys.argv[0])
 
     logger = logging.getLogger(program)
     logging.basicConfig(
-        filename='cc_log.txt',
-        format='%(asctime)s : %(levelname)s : %(message)s',
-        level=logging.DEBUG)
+        filename='wiki_log.txt',
+        format='%(asctime)s: %(levelname)s: %(message)s',
+        level=logging.INFO)
 
     logger.info("running %s" % ' '.join(sys.argv))
 
@@ -31,8 +32,8 @@ if __name__ == "__main__":
     # log arguments
     logger.info('Training with: ' + ' '.join([k + " : " + str(v) for k, v in args.iteritems()]))
 
-    # import data from cassandra
-    sentences = CassandraSentences(input, 'ngramspace', limit)
+    # import sentences
+    sentences = slice(LineSentence(input), limit);
 
     try:
         # train model
@@ -41,7 +42,7 @@ if __name__ == "__main__":
         # Save model
         logger.info('Saving model to file')
         model.init_sims(replace=True)
-        model.save(output + str(limit))
+        model.save(output + "_" + str(limit))
 
         logger.info('Model has been saved.')
 

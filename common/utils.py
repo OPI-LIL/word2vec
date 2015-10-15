@@ -20,7 +20,7 @@ def parse_args(argv):
     dict = {'limit': None, 'size': 500, 'min_count': 5, 'workers': multiprocessing.cpu_count(), }
 
     try:
-        opts, args = getopt.getopt(argv, "hl:w:m:s:i:", ["limit=", "workers=", "min_count=", "size=", "hostIp="])
+        opts, args = getopt.getopt(argv, "hl:w:m:s:i:o:", ["limit=", "workers=", "min_count=", "size=", "input=", "output="])
     except getopt.GetoptError:
         print os.path.basename(sys.argv[0]) + ' -i <inputfile> -o <outputfile>'
         sys.exit(2)

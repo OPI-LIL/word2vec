@@ -1,17 +1,18 @@
+import os
 import sys
 import logging
-import os
 
 from gensim.models import Word2Vec
-from gensim.models.word2vec import LineSentence
-from utils import parse_args, slice
 
-if __name__ == '__main__':
+from NKJP.NKJPSentences import  NKJPSentences
+from common.utils import parse_args, slice
+
+if __name__ == "__main__":
     program = os.path.basename(sys.argv[0])
 
     logger = logging.getLogger(program)
     logging.basicConfig(
-        filename='wiki_log.txt',
+        filename='nkjp_log.txt',
         format='%(asctime)s: %(levelname)s: %(message)s',
         level=logging.INFO)
 
@@ -32,7 +33,7 @@ if __name__ == '__main__':
     logger.info('Training with: ' + ' '.join([k + " : " + str(v) for k, v in args.iteritems()]))
 
     # import sentences
-    sentences = slice(LineSentence(input), limit);
+    sentences = slice(NKJPSentences(input), limit)
 
     try:
         # train model
@@ -41,7 +42,7 @@ if __name__ == '__main__':
         # Save model
         logger.info('Saving model to file')
         model.init_sims(replace=True)
-        model.save(output + str(limit))
+        model.save(output + "_" + str(limit))
 
         logger.info('Model has been saved.')
 

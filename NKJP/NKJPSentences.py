@@ -4,10 +4,10 @@ from string import digits
 
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-from utils import  LogMixin
+from common.utils import  LogMixin
 
 
-class NKJPSentences(object, LogMixin):
+class NKJPSentences(LogMixin):
     def __init__(self, rootPath, limit=None):
         self.fileName = "text.xml"
         self.rootPath = rootPath

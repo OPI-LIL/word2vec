@@ -3,17 +3,18 @@ import sys
 import logging
 
 from gensim.models import Word2Vec
-from NKJP.NKJPSentences import NKJPSentences
-from utils import parse_args, slice
+
+from common_crawl.CassandraSentences import CassandraSentences
+from common.utils import parse_args
 
 if __name__ == "__main__":
     program = os.path.basename(sys.argv[0])
 
     logger = logging.getLogger(program)
     logging.basicConfig(
-        filename='nkjp_log.txt',
-        format='%(asctime)s: %(levelname)s: %(message)s',
-        level=logging.INFO)
+        filename='cc_log.txt',
+        format='%(asctime)s : %(levelname)s : %(message)s',
+        level=logging.DEBUG)
 
     logger.info("running %s" % ' '.join(sys.argv))
 
@@ -31,8 +32,8 @@ if __name__ == "__main__":
     # log arguments
     logger.info('Training with: ' + ' '.join([k + " : " + str(v) for k, v in args.iteritems()]))
 
-    # import sentences
-    sentences = slice(NKJPSentences(input), limit)
+    # import data from cassandra
+    sentences = CassandraSentences(input, 'ngramspace', limit)
 
     try:
         # train model
@@ -41,7 +42,7 @@ if __name__ == "__main__":
         # Save model
         logger.info('Saving model to file')
         model.init_sims(replace=True)
-        model.save(output + str(limit))
+        model.save(output + "_" + str(limit))
 
         logger.info('Model has been saved.')
 
