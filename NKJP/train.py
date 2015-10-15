@@ -1,7 +1,6 @@
+import os
 import sys
 import logging
-import os.path
-import multiprocessing
 
 from gensim.models import Word2Vec
 from NKJP.NKJPSentences import NKJPSentences
@@ -26,13 +25,27 @@ if __name__ == "__main__":
             logger.error('Argument ' + arg + ' is missing')
             sys.exit(1)
 
-    # check and process input arguments
-    inp, outp, limit = args['input'], args['output'], args['limit']
+    limit, workers, min_count, size, input, output = args['limit'], args['workers'], args['min_count'], \
+                                                     args['size'], args['input'], args['output']
 
-    sentences = slice(NKJPSentences(inp), limit)
+    # log arguments
+    logger.info('Training with: ' + ' '.join([k + " : " + str(v) for k, v in args.iteritems()]))
 
-    model = Word2Vec(sentences, size=400, window=5, min_count=5, workers=multiprocessing.cpu_count())
+    # import sentences
+    sentences = slice(NKJPSentences(input), limit)
 
-    # trim unneeded model memory = use(much) less RAM
-    model.init_sims(replace=True)
-    model.save(outp)
+    try:
+        # train model
+        model = Word2Vec(sentences, min_count=min_count, workers=workers, size=size)
+
+        # Save model
+        logger.info('Saving model to file')
+        model.init_sims(replace=True)
+        model.save(output + str(limit))
+
+        logger.info('Model has been saved.')
+
+    except Exception as exc:
+        logger.exception('Exception in model training: ' + str(exc))
+
+    logger.info('Done!')
