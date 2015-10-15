@@ -4,13 +4,13 @@ from string import digits
 
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-from mixins import  LogMixin
+from utils import  LogMixin
 
 
 class NKJPSentences(object, LogMixin):
-    def __init__(self, rootPath, fileName, limit=None):
+    def __init__(self, rootPath, limit=None):
+        self.fileName = "text.xml"
         self.rootPath = rootPath
-        self.fileName = fileName
         self.limit = limit
 
     def __iter__(self):

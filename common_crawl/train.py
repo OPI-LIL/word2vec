@@ -1,11 +1,11 @@
-# System stuff
 import sys
 import getopt
 import gensim
 
-# Logging stuff
-import logging
 from common_crawl.CassandraSentences import CassandraSentences
+
+# Configure logging
+import logging
 
 logging.basicConfig(
     filename='cc_log.txt',

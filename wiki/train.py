@@ -1,6 +1,6 @@
+import sys
 import logging
 import os.path
-import sys
 import multiprocessing
 
 from gensim.models import Word2Vec
@@ -21,9 +21,10 @@ if __name__ == '__main__':
     # check and process input arguments
     args = parse_args(sys.argv[1:])
 
-    if not 'input' in args:
-        logger.error("No input given!")
-        sys.exit(1)
+    for arg in ['input', 'output']:
+        if not arg in args:
+            logger.error('Argument ' + arg + ' is missing')
+            sys.exit(1)
 
     # check and process input arguments
     inp, outp, limit = args['input'], args['output'], args['limit']
