@@ -6,7 +6,7 @@ from cassandra.cluster import Cluster
 # Logging stuff
 from utils.utils import LogMixin
 
-class CassandraSentences(object, LogMixin):
+class CassandraSentences(LogMixin):
     def __init__(self, hostIp, table, limit=None):
         self.hostIp = hostIp
         self.table = table
