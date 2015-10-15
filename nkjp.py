@@ -5,7 +5,7 @@ import logging
 from gensim.models import Word2Vec
 
 from NKJP.NKJPSentences import  NKJPSentences
-from common.utils import parse_args, slice
+from utils.utils import parse_args, slice
 
 if __name__ == "__main__":
     program = os.path.basename(sys.argv[0])

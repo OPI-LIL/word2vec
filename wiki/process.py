@@ -7,7 +7,7 @@ import sys
 
 from gensim.corpora import WikiCorpus
 
-from common.utils import parse_args, slice
+from utils.utils import parse_args, slice
 
 
 def iterate_with_logging(logger, step, generator, function):

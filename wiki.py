@@ -5,7 +5,7 @@ import os
 from gensim.models import Word2Vec
 from gensim.models.word2vec import LineSentence
 
-from common.utils import parse_args, slice
+from utils.utils import parse_args, slice
 
 if __name__ == '__main__':
     program = os.path.basename(sys.argv[0])

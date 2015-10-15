@@ -5,7 +5,7 @@ import logging
 from gensim.models import Word2Vec
 
 from common_crawl.CassandraSentences import CassandraSentences
-from common.utils import parse_args
+from utils.utils import parse_args
 
 if __name__ == "__main__":
     program = os.path.basename(sys.argv[0])

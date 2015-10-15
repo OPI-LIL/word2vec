@@ -4,7 +4,7 @@ from cassandra.cluster import Cluster
 
 
 # Logging stuff
-from common.utils import LogMixin
+from utils.utils import LogMixin
 
 class CassandraSentences(object, LogMixin):
     def __init__(self, hostIp, table, limit=None):

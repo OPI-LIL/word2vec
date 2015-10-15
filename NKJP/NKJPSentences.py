@@ -4,7 +4,7 @@ from string import digits
 
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-from common.utils import  LogMixin
+from utils.utils import  LogMixin
 
 
 class NKJPSentences(LogMixin):
