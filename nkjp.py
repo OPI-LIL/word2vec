@@ -41,7 +41,6 @@ if __name__ == "__main__":
 
         # Save model
         logger.info('Saving model to file')
-        model.init_sims(replace=True)
         model.save(output + "_" + str(limit))
 
         logger.info('Model has been saved.')
