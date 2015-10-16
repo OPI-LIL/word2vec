@@ -45,4 +45,4 @@ class CassandraSentences(LogMixin):
 
         except Exception as exc:
             self.logger.exception('Unexpected error: ' + str(exc))
-            raise
+            self.logger.exception(exc)
