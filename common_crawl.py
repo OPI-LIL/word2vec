@@ -48,7 +48,8 @@ if __name__ == "__main__":
         model.save(name)
         logger.info('Model has been saved as ' + name)
 
-    except Exception as exc:
-        logger.exception('Exception in model training: ' + str(exc))
+    except Exception, e:
+        logger.error('Exception in model training: ' + str(e))
+        logger.exception(e)
 
     logger.info('Done!')
