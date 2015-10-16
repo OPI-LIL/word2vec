@@ -42,9 +42,11 @@ if __name__ == "__main__":
         # Save model
         logger.info('Saving model to file')
         model.init_sims(replace=True)
-        model.save(output + "_" + str(limit))
 
-        logger.info('Model has been saved.')
+        name = output + "_" + str(limit)
+
+        model.save(name)
+        logger.info('Model has been saved as ' + name)
 
     except Exception as exc:
         logger.exception('Exception in model training: ' + str(exc))
